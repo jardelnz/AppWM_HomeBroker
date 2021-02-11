@@ -1,0 +1,52 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Cadastrar ordem</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item-group>
+    <h2>{{ acao.nome }}</h2>
+    <p><b>Valor atual:</b> R$ {{ acao.preco | number : '.2' }}</p>
+  </ion-item-group>
+
+  <form (ngSubmit)="validarOrdem(tipo,valor,quantidade)" #formulario="ngForm">
+
+    <ion-list radio-group [(ngModel)]="tipo" name="tipo" required="true">
+
+      <ion-item>
+        <ion-label>Compra</ion-label>
+        <ion-radio value="Compra" checked></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Venda</ion-label>
+        <ion-radio value="Venda"></ion-radio>
+      </ion-item>
+      
+    </ion-list>
+    
+    <ion-item>
+      <ion-label floating>Quantidade:</ion-label>
+      <ion-input [(ngModel)]="quantidade" name="quantidade" type="number" min="1" [value]="1"
+        (ionChange)=calculaTotal(quantidade,valor)></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Valor R$:</ion-label>
+      <ion-input [(ngModel)]="valor" name="valor" type="number" [value]="acao.preco" min="0" (ionChange)=calculaTotal(quantidade,valor)></ion-input>
+    </ion-item>
+
+
+    <ion-item-divider color="light">
+      <span item-right>TOTAL: R$ {{total | number : '.2'}} </span>
+    </ion-item-divider>
+    <br />
+    <button ion-button full>Confirmar ordem</button>
+
+  </form>
+
+</ion-content>

@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      WM Home Broker
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-card *ngFor="let acao of acoes" (click)="selecionaAcao(acao)">
+    <ion-card-header text-center>
+      {{acao.nome}}  {{acao.variacao}}%  
+        <ion-icon *ngIf="acao.variacao < 0" color="danger" name="trending-down" item-start></ion-icon>
+        <ion-icon *ngIf="acao.variacao > 0" color="primary" name="trending-up" item-start></ion-icon>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <h2>R$ {{acao.preco | number : '.2'}}</h2>
+        <p>Mínimo: R$ {{acao.minimo | number : '.2'}}</p>
+        <p>Máximo: R$ {{acao.maximo | number : '.2'}}</p>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

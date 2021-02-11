@@ -1,0 +1,48 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ acao.nome }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-item-group>
+
+    <ion-item-divider color="light">
+      <ion-icon name="options"></ion-icon>
+      Minha carteira
+    </ion-item-divider>
+
+    <div *ngIf="quantidade == 0; else listaDeAcoes">
+      <ion-item>Você não possui ações {{acao.nome}}.</ion-item>
+    </div>
+
+    <ng-template #listaDeAcoes>
+      <ion-item><b>Quantidade:</b> {{quantidade }} </ion-item>
+      <ion-item><b>Valor:</b> R$ {{ acao.preco | number : '.2' }}</ion-item>
+      <ion-item><b>Total:</b> R$ {{total | number : '.2'}} </ion-item>
+    </ng-template>
+
+  </ion-item-group>
+  <br />
+  <button ion-button full (click)="criarOrdem()">Cadastrar ordem</button>
+
+  <ion-item-divider></ion-item-divider>
+
+  <ion-item-group>
+    <ion-item-divider color="light">
+      <ion-icon name="options"></ion-icon>
+      Ordens abertas
+    </ion-item-divider>
+
+    <div *ngFor="let ordem of this.ordens">
+      <ion-item *ngIf="(ordem.acao == this.acao.id) && (ordem.status == 'Aberta')">
+        <p><b>{{ordem.tipo}} </b> de {{ordem.quantidade}} (R$ {{ordem.valor}}) ** <b>Stauts:</b> {{ordem.status}}</p>
+      </ion-item>
+    </div>
+  </ion-item-group>
+
+</ion-content>
