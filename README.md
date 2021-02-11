@@ -5,7 +5,7 @@
 ### Para executar:
 ```bash
 $ npm install
-$ ionic server --lab
+$ ionic serve --lab
 ```
 
 ### Descrição da solicitação da Working Minds:
